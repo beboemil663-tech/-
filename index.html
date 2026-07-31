@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Princess Marina ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #ff3366; --bg-color: #ffffff; --text-dark: #2c3e50; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-color); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; position: relative; }
+        .heart-particle, .sparkle-particle { position: fixed; top: -20px; user-select: none; pointer-events: none; z-index: 1; animation: fall linear infinite; }
+        @keyframes fall { 0% { transform: translateY(-20px) rotate(0deg) scale(0.8); opacity: 1; } 100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0.2; } }
+        #login-screen { position: fixed; inset: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); z-index: 999; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .login-card { background: #ffffff; padding: 40px 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(255, 51, 102, 0.15); text-align: center; max-width: 380px; width: 100%; border: 2px solid #ffe6ed; }
+        .login-card h2 { color: var(--primary); margin-bottom: 20px; font-size: 1.8rem; }
+        .login-input { width: 100%; padding: 12px 20px; font-size: 1.2rem; border: 2px solid #ffd1dc; border-radius: 15px; outline: none; text-align: center; margin-bottom: 20px; }
+        .btn-main { background: linear-gradient(45deg, #ff3366, #ff6b81); color: white; border: none; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 25px; cursor: pointer; width: 100%; }
+        .error-msg { color: #d63031; font-size: 0.9rem; margin-top: 10px; display: none; }
+        #main-content { display: none; opacity: 0; transition: opacity 1s ease; max-width: 800px; margin: 0 auto; padding: 30px 20px; position: relative; z-index: 2; }
+        .title-container { text-align: center; margin: 20px 0 30px 0; }
+        .pulsing-name { font-family: 'Reem Kufi', sans-serif; font-size: 3.5rem; color: var(--primary); display: inline-block; animation: pulse 1.5s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .repeated-text { text-align: center; color: #ff6b81; font-size: 1.1rem; font-weight: 600; margin: 15px 0; }
+        .timer-box { background: rgba(255, 240, 245, 0.7); border: 2px dashed #ffb6c1; border-radius: 20px; padding: 20px; text-align: center; margin: 25px 0; }
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .timer-item { background: #ffffff; padding: 10px 5px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .timer-value { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .timer-label { font-size: 0.8rem; color: #777; }
+        .action-area { text-align: center; margin: 40px 0; }
+        .btn-reveal { background: linear-gradient(45deg, #ff3366, #ff4757); color: white; padding: 18px 35px; font-size: 1.3rem; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; animation: floatBtn 3s infinite ease-in-out; }
+        @keyframes floatBtn { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .message-box { display: none; background: #ffffff; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(255, 51, 102, 0.12); border: 1px solid #ffe6ed; margin-top: 30px; font-size: 1.25rem; line-height: 2; color: #2c3e50; text-align: justify; }
+        .final-quote { display: none; text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(45deg, #ffe6ed, #ffffff); border-radius: 15px; color: var(--primary); font-size: 1.4rem; font-weight: 800; }
+        .audio-control { position: fixed; bottom: 20px; left: 20px; z-index: 100; background: #ffffff; padding: 8px 15px; border-radius: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; border: 1px solid #ffe6ed; }
+        .audio-btn { background: var(--primary); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+    </style>
+</head>
+<body>
+    <div id="particles-container"></div>
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>مرحباً يا أميرتي ❤️</h2>
+            <p style="margin-bottom: 15px; color: #666;">ادخلي كلمة السر الخاصة بكِ</p>
+            <input type="password" id="password-input" class="login-input" placeholder="اكتبي الباسورد هنا..." autofocus>
+            <button class="btn-main" onclick="checkPassword()">دخول ✨</button>
+            <div id="error-msg" class="error-msg">الباسورد مش صح يا بنوتي! حاول تاني 🥺</div>
+        </div>
+    </div>
+    <div id="main-content">
+        <div class="repeated-text">بحبك اوي يا بنوتي ❤️🥰</div>
+        <div class="title-container"><h1 class="pulsing-name">Marina</h1></div>
+        <div class="repeated-text">بحبك اوي يا بنوتي ❤️🥰</div>
+        <div class="timer-box">
+            <div class="timer-title">مع بعض وحبنا بيكبر بقالنا: ❤️</div>
+            <div class="timer-grid">
+                <div class="timer-item"><div class="timer-value" id="days">0</div><div class="timer-label">يوم</div></div>
+                <div class="timer-item"><div class="timer-value" id="hours">0</div><div class="timer-label">ساعة</div></div>
+                <div class="timer-item"><div class="timer-value" id="minutes">0</div><div class="timer-label">دقيقة</div></div>
+                <div class="timer-item"><div class="timer-value" id="seconds">0</div><div class="timer-label">ثانية</div></div>
+            </div>
+        </div>
+        <div class="repeated-text">بحبك اوي يا بنوتي ❤️🥰</div>
+        <div class="action-area"><button class="btn-reveal" id="reveal-btn" onclick="revealMessage()">دوسي هنا يا مارينا ❤️</button></div>
+        <div class="message-box" id="message-box"><span id="typed-text"></span></div>
+        <div class="final-quote" id="final-quote">بحبك بطريقة متتوصفش حرفيًا ❤️🥺</div>
+    </div>
+    <div class="audio-control">
+        <button class="audio-btn" id="audio-toggle" onclick="toggleAudio()">🎵</button>
+        <span style="font-size: 0.85rem; color: #555; font-weight: bold;">أغنيتنا ❤️</span>
+        <audio id="bg-music" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
+    </div>
+    <script>
+        const fullMessage = "بحبك اوي يا بنوتي بجد بعشقك حرفيا ❤️🥰 حياتي كلها بجد ليها طعم كدة معاكي يا روحي و اي حاجة بنكون فيها سوا بتكون احلي حاجة في اليوم اصلا ❤️🥺 و عمري م كنت أتوقع أن يجي حد كدة يا روحي يحسن حياتي بالطريقة دي و يغيرها كدة للأحسن اوووي حرفيا ❤️🥰 انا مش بس بحبك انا بعشقك يا بنوتي و بجد حتة مني كدة حرفيا و مش عايز غيرك معايا باقي عمري عايزك انتي و بس صحبتي و مراتي و حبيبتي و بنتي و كل حاجة في دنيتي علشان انتي دنيتي كلها بجد ❤️❤️❤️🥰😍 ربنا يخليكي ليا يا قلبي و العمر كلو سوا يا بنوتي ❤️❤️❤️🥰";
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            if (input === 'M' || input === 'm') {
+                document.getElementById('login-screen').style.display = 'none';
+                const mainContent = document.getElementById('main-content');
+                mainContent.style.display = 'block';
+                setTimeout(() => { mainContent.style.opacity = '1'; }, 50);
+                playAudio();
+            } else { errorMsg.style.display = 'block'; }
+        }
+        document.getElementById('password-input').addEventListener('keypress', function (e) { if (e.key === 'Enter') { checkPassword(); } });
+        function createParticle() {
+            const container = document.getElementById('particles-container');
+            const particle = document.createElement('div');
+            const isHeart = Math.random() > 0.3;
+            particle.className = isHeart ? 'heart-particle' : 'sparkle-particle';
+            particle.innerHTML = isHeart ? '❤️' : '✨';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particle.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            container.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 6000);
+        }
+        setInterval(createParticle, 300);
+        const startDate = new Date('2026-05-15T00:00:00');
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / 1000 / 60) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours;
+                document.getElementById('minutes').innerText = minutes;
+                document.getElementById('seconds').innerText = seconds;
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        let isWriting = false;
+        function revealMessage() {
+            playAudio();
+            if (isWriting) return;
+            isWriting = true;
+            const btn = document.getElementById('reveal-btn');
+            const msgBox = document.getElementById('message-box');
+            const typedTextSpan = document.getElementById('typed-text');
+            const finalQuote = document.getElementById('final-quote');
+            btn.style.display = 'none';
+            msgBox.style.display = 'block';
+            let index = 0;
+            function typeNextChar() {
+                if (index < fullMessage.length) {
+                    typedTextSpan.innerHTML += fullMessage.charAt(index);
+                    index++;
+                    setTimeout(typeNextChar, 45);
+                } else {
+                    setTimeout(() => { finalQuote.style.display = 'block'; }, 500);
+                }
+            }
+            typeNextChar();
+        }
+        const audio = document.getElementById('bg-music');
+        let isPlaying = false;
+        function playAudio() {
+            audio.play().then(() => {
+                isPlaying = true;
+                document.getElementById('audio-toggle').innerText = '⏸️';
+            }).catch(err => { console.log("Audio deferred"); });
+        }
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                document.getElementById('audio-toggle').innerText = '🎵';
+            } else {
+                audio.play();
+                document.getElementById('audio-toggle').innerText = '⏸️';
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+</body>
+                                          </html>
